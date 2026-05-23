@@ -1,0 +1,6 @@
+# Frictionless but dangerous.
+# Only use on trusted machines and trusted repos with good backups.
+
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+

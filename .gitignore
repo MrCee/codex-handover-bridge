@@ -1,0 +1,13 @@
+.DS_Store
+.env
+.env.*
+secrets/
+private/
+*.tmp
+*.log
+AGENTS.local.md
+local/
+handover-private/
+codex-runs/private/
+project-handovers/private/
+

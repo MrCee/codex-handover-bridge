@@ -1,0 +1,12 @@
+# Safer public default.
+# Allows normal workspace writes plus an explicit private handover repo root.
+
+approval_policy = { granular = { sandbox_approval = true, rules = false, mcp_elicitations = false, request_permissions = false, skill_approval = false } }
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+writable_roots = [
+  "~/repos/codex-sync"
+]
+network_access = true
+
