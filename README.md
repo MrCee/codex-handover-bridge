@@ -109,6 +109,7 @@ At the end of meaningful tasks, update my private handover repo:
 - project-handovers/<project-name>/LAST-HANDOVER.md
 
 Stage only those expected files, commit them, and push the handover repo.
+Do not stage unrelated project files or use `git add -A` unless explicitly requested.
 Do not store secrets, tokens, private evidence, or raw logs.
 Do not push the source project unless I explicitly ask.
 ```

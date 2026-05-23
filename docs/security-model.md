@@ -65,6 +65,7 @@ git add -A
 ```
 
 Targeted staging reduces the chance of publishing secrets, local notes, raw logs, or unrelated files.
+Keep this rule project-neutral by using placeholders such as `<project-name>` in reusable instructions instead of hard-coding one source project's handover path.
 
 ## Useful `.gitignore` Entries
 
@@ -79,4 +80,3 @@ local/
 codex-runs/private/
 project-handovers/private/
 ```
-
