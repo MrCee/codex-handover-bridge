@@ -10,6 +10,16 @@ Copy the parts you want into your local `~/.codex/AGENTS.md`. Keep real private 
 - Do not set strict mode in the parent interactive shell.
 - Do not leave the user's shell state changed.
 
+## Launch Mode For Trusted Repos
+
+- For trusted personal repos you control, you may choose a low-friction Codex launch mode.
+- Start Codex from the normal shell with:
+  - `codex --dangerously-bypass-approvals-and-sandbox`
+- Do not start a nested interactive Codex session from inside an already-running Codex session.
+- If a session was started without the intended bypass mode and prompts become excessive, stop cleanly, return to the normal shell prompt, and restart Codex with the intended command.
+- For untrusted, downloaded, client, or unfamiliar repos, do not assume bypass mode is appropriate.
+- Even in bypass mode, keep edits scoped, avoid `git add -A` unless explicitly requested, and do not force-push.
+
 ## Handover Rule
 
 At the end of every meaningful Codex task, write or update the latest handover files in your private handover repo:
