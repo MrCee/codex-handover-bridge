@@ -145,6 +145,8 @@ Do not copy private handovers, real local paths, names, emails, client details, 
 
 Before publishing, run a sanitisation review and prefer reimplementing the idea cleanly instead of copying private files verbatim. See [docs/private-to-public-promotion.md](docs/private-to-public-promotion.md) and [scripts/promote-public-candidate.sh](scripts/promote-public-candidate.sh).
 
+Some people may turn this into a personal Codex rule for their private workflow, but it is optional. This template documents the pattern; it does not require every user to maintain a public upstream repo.
+
 ## Not Official Tooling
 
 This project is not official OpenAI tooling. It is a practical workflow pattern using local files, Git, GitHub, and the ChatGPT GitHub connector.

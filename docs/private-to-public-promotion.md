@@ -8,6 +8,14 @@ This project separates the live operational handover repo from the public reusab
 
 Not every private change should be published.
 
+## Personal Automation Versus Template Guidance
+
+Some users may choose to make the promotion check a personal rule in their private Codex instructions. For example, they might require Codex to check every private handover-repo change and decide whether a sanitized public equivalent belongs in a public template repo.
+
+That is a useful personal workflow, but it is not a default requirement for everyone using this template.
+
+If you adopt it, keep the rule in your private or global Codex instructions. Public repos should document the pattern generically, not contain personal paths, private handovers, or project-specific agent rules.
+
 ## Operating Rule
 
 When making improvements to `~/repos/codex-sync`, consider whether the change is a reusable public-facing improvement for `~/repos/codex-handover-bridge`.
