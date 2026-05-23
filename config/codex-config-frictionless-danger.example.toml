@@ -1,6 +1,17 @@
 # Frictionless but dangerous.
-# Only use on trusted machines and trusted repos with good backups.
+#
+# Why someone might choose this:
+# - avoids repeated approval prompts
+# - allows direct Git writes to secondary repos such as ~/repos/codex-sync
+# - can avoid workspace sandbox failures around .git/index.lock
+#
+# Why to be careful:
+# - Codex can write outside the active repo
+# - Codex will not stop to ask before running commands
+# - vague prompts or unknown repos can damage files
+#
+# Use only on trusted machines, trusted repos, and with good backups.
+# Prefer exact repo paths and explicit staging.
 
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
-

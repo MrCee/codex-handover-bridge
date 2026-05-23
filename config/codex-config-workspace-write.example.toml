@@ -1,5 +1,5 @@
-# Safer public default.
-# Allows normal workspace writes plus an explicit private handover repo root.
+# Workspace-write configuration with explicit writable roots.
+# This is a safer starting point than danger-full-access.
 #
 # Note: depending on Codex behavior and your shell/config parser, "~" may
 # need to be expanded to an absolute path. Verify the config before relying
@@ -13,3 +13,4 @@ writable_roots = [
   "~/repos/codex-sync"
 ]
 network_access = true
+

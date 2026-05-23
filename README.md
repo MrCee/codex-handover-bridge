@@ -116,6 +116,15 @@ scripts/                                  Small helper scripts for handover repo
 templates/                                Markdown handover templates
 ```
 
+Config and shell safety references:
+
+- [docs/config-evolution.md](docs/config-evolution.md)
+- [docs/dangerous-config-explained.md](docs/dangerous-config-explained.md)
+- [docs/zsh-subshell-patterns.md](docs/zsh-subshell-patterns.md)
+- [config/codex-config-safe.example.toml](config/codex-config-safe.example.toml)
+- [config/codex-config-workspace-write.example.toml](config/codex-config-workspace-write.example.toml)
+- [config/codex-config-frictionless-danger.example.toml](config/codex-config-frictionless-danger.example.toml)
+
 ## Safety Notes
 
 The real handover repo should normally be private because it may contain local paths, branch names, filenames, implementation notes, and risk summaries.

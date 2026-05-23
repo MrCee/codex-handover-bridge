@@ -18,6 +18,18 @@ Only use it on trusted machines, trusted repos, and with good backups.
 
 The safest public default should not be `danger-full-access`.
 
+> Warning: `danger-full-access` can write outside the active repo.
+
+> Warning: `approval_policy = "never"` means Codex will not stop and ask before running commands.
+
+> Warning: this can damage files if prompts are wrong, ambiguous, or applied to the wrong repository.
+
+Use only on trusted machines, with Git backups, and with repo-specific safeguards.
+
+Never combine this mode with vague prompts or unknown repositories.
+
+Prefer exact repo paths, known filenames, explicit staging, and clear validation steps.
+
 ## Tier 1: Safer Default
 
 Use workspace write access and explicitly allow the private handover repo as a writable root.
@@ -34,6 +46,8 @@ network_access = true
 ```
 
 This is the recommended public starting point.
+
+Depending on Codex behavior and your config parser, `~` may need to be expanded to an absolute path. Verify that the writable root is actually honored before relying on direct handover publishing.
 
 ## Tier 2: Frictionless But Dangerous
 
@@ -65,4 +79,3 @@ Safe sandbox plus no prompts may require a temp-clone fallback.
 Safe sandbox plus direct Git writes may require approval prompts.
 
 No prompts plus direct Git writes requires accepting `danger-full-access` risk.
-
