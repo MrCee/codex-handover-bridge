@@ -35,6 +35,7 @@ Public-facing candidates include:
 - troubleshooting lessons
 - generic config examples
 - generic loader prompt improvements
+- optional rolling recent handover patterns with sanitized examples
 
 ## Never Publish
 
@@ -53,6 +54,8 @@ Never publish:
 Require a sanitisation review before copying any idea into the public repo.
 
 Prefer reimplementing the idea cleanly in the public repo instead of copying private files verbatim. Reimplementation forces you to remove private context, simplify the wording, and make the result useful to other users.
+
+Rolling recent handovers are a good example: the reusable idea is a small per-project `recent/` buffer, such as the newest 10 Markdown handovers. The private handover contents, real paths, project names, logs, and repo history must not be copied into public docs.
 
 ## Public Promotion Checklist
 

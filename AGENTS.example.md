@@ -17,6 +17,12 @@ At the end of every meaningful Codex task, write or update the latest handover f
 - `codex-runs/LAST-CODEX-RUN.md`
 - `project-handovers/<project-name>/LAST-HANDOVER.md`
 
+Optionally, also write a timestamped project recovery copy:
+
+- `project-handovers/<project-name>/recent/YYYY.MM.DD-HHMMSS.md`
+
+If using project recent handovers, keep only the newest 10 `.md` files in each project `recent/` directory. `LAST-CODEX-RUN.md` remains the fast loader for `;codexload`; recent handovers are only a recovery buffer if several Codex runs happen before returning to ChatGPT Web UI.
+
 Every handover should include:
 
 - date/time
@@ -45,11 +51,11 @@ Do not publish private handovers to public template repos.
 ## Git Rules For The Private Handover Repo
 
 - Always run `git status --short` before staging.
-- Stage only known handover files.
+- Stage only known handover files and intended recent handover additions/deletions.
 - Never use `git add -A` for handover publishing.
 - Commit if there are staged changes.
 - Push the private handover repo after committing.
-- Do not create timestamped archives unless explicitly requested.
+- Do not create global timestamped archives unless explicitly requested.
 
 Example commit message:
 

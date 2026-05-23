@@ -32,6 +32,14 @@ codex-runs/LAST-CODEX-RUN.md
 project-handovers/<project-name>/LAST-HANDOVER.md
 ```
 
+Optionally, a private handover repo can also keep a small rolling recovery buffer:
+
+```text
+project-handovers/<project-name>/recent/YYYY.MM.DD-HHMMSS.md
+```
+
+Keep this buffer small, such as the newest 10 handovers per project. `LAST-CODEX-RUN.md` remains the fast loader for `;codexload`; the recent folder is only for recovery if several Codex runs happen before you return to ChatGPT Web UI.
+
 Then ChatGPT Web UI can load those files on demand with a short convention such as:
 
 ```text

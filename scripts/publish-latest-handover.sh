@@ -26,7 +26,9 @@ Options:
 This script stages only:
   codex-runs/LAST-CODEX-RUN.md
   project-handovers/<project-name>/LAST-HANDOVER.md
+  project-handovers/<project-name>/recent/*.md additions/deletions
 
+It keeps only the newest 10 Markdown files in the project recent directory.
 It commits if those files changed and pushes only if a remote exists.
 USAGE
 }
@@ -44,7 +46,7 @@ shift 3
 task="Not provided."
 inspected="Not provided."
 changed="Not provided."
-commands="Not provided."
+commands_run="Not provided."
 validation="Not provided."
 validation_result="Not provided."
 risks="Not provided."
@@ -65,7 +67,7 @@ while (( $# > 0 )); do
       shift 2
       ;;
     --commands)
-      commands="${2:?missing value for --commands}"
+      commands_run="${2:?missing value for --commands}"
       shift 2
       ;;
     --validation)
@@ -111,21 +113,25 @@ if [[ ! -d "$source_project_path" ]]; then
   exit 1
 fi
 
-mkdir -p "$handover_repo/codex-runs" "$handover_repo/project-handovers/$project_name"
+project_dir="$handover_repo/project-handovers/$project_name"
+recent_dir="$project_dir/recent"
+mkdir -p "$handover_repo/codex-runs" "$project_dir" "$recent_dir"
 
 now="$(date '+%Y-%m-%d %H:%M:%S %Z')"
+stamp="$(date '+%Y.%m.%d-%H%M%S')"
 source_repo="$(git -C "$source_project_path" remote get-url origin 2>/dev/null || print "unknown")"
 branch="$(git -C "$source_project_path" branch --show-current 2>/dev/null || print "unknown")"
 commit="$(git -C "$source_project_path" rev-parse HEAD 2>/dev/null || print "unknown")"
 
 latest_path="$handover_repo/codex-runs/LAST-CODEX-RUN.md"
-project_path="$handover_repo/project-handovers/$project_name/LAST-HANDOVER.md"
+project_path="$project_dir/LAST-HANDOVER.md"
+recent_path="$recent_dir/$stamp.md"
 
 write_handover() {
-  local path="$1"
+  local output_path="$1"
   local title="$2"
 
-  cat > "$path" <<EOF
+  cat > "$output_path" <<EOF
 # $title
 
 - date/time: $now
@@ -146,7 +152,7 @@ write_handover() {
 
 ## Commands Run
 
-- $commands
+- $commands_run
 
 ## Validation Performed
 
@@ -168,9 +174,18 @@ EOF
 
 write_handover "$latest_path" "Latest Codex Run"
 write_handover "$project_path" "Project Handover"
+write_handover "$recent_path" "Recent Project Handover"
+
+old_recent_files=()
+while IFS= read -r old_recent_file; do
+  [[ -n "$old_recent_file" ]] && old_recent_files+=("$old_recent_file")
+done < <(find "$recent_dir" -type f -name '*.md' -print | sort | awk -v keep=10 '{ files[NR]=$0 } END { for (i = 1; i <= NR - keep; i++) print files[i] }')
+if (( ${#old_recent_files[@]} > 0 )); then
+  rm -- "${old_recent_files[@]}"
+fi
 
 git -C "$handover_repo" status --short
-git -C "$handover_repo" add codex-runs/LAST-CODEX-RUN.md "project-handovers/$project_name/LAST-HANDOVER.md"
+git -C "$handover_repo" add codex-runs/LAST-CODEX-RUN.md "project-handovers/$project_name/LAST-HANDOVER.md" "project-handovers/$project_name/recent"
 
 if git -C "$handover_repo" diff --cached --quiet; then
   print "No handover changes to commit."

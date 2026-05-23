@@ -11,6 +11,8 @@ fi
 
 cd "$repo_root"
 
+project_name="${1:-}"
+
 print "Repo:"
 pwd
 
@@ -30,3 +32,36 @@ else
   print "codex-runs/LAST-CODEX-RUN.md not found."
 fi
 
+if [[ -n "$project_name" ]]; then
+  if [[ "$project_name" == *"/"* || "$project_name" == "." || "$project_name" == ".." ]]; then
+    print -u2 "error: project argument must be a single safe path segment."
+    exit 2
+  fi
+
+  project_path="project-handovers/$project_name/LAST-HANDOVER.md"
+  recent_dir="project-handovers/$project_name/recent"
+
+  print
+  print "Project handover: $project_path"
+  if [[ -f "$project_path" ]]; then
+    cat "$project_path"
+  else
+    print "$project_path not found."
+  fi
+
+  print
+  print "Recent handovers: $recent_dir"
+  if [[ -d "$recent_dir" ]]; then
+    recent_files=()
+    while IFS= read -r recent_file; do
+      [[ -n "$recent_file" ]] && recent_files+=("$recent_file")
+    done < <(find "$recent_dir" -type f -name '*.md' -print | sort -r)
+    if (( ${#recent_files[@]} > 0 )); then
+      printf '%s\n' "${recent_files[@]}"
+    else
+      print "No recent handovers found."
+    fi
+  else
+    print "$recent_dir not found."
+  fi
+fi

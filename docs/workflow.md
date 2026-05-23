@@ -27,6 +27,28 @@ project-handovers/<project-name>/LAST-HANDOVER.md
 
 Stable filenames make the loader prompt short and reliable. They also avoid publishing long histories by default.
 
+## Rolling Recent Handovers
+
+Some private handover repos also keep a small project-specific recovery buffer:
+
+```text
+project-handovers/<project-name>/recent/YYYY.MM.DD-HHMMSS.md
+```
+
+This is useful when several Codex runs happen before you return to ChatGPT Web UI. The latest files still carry the normal continuation point, while `recent/` gives you a short fallback trail if an intermediate handover matters.
+
+Keep the buffer intentionally small. A practical default is the newest 10 Markdown files per project:
+
+```text
+project-handovers/<project-name>/recent/
+```
+
+Delete older recent handovers automatically. Do not create global timestamped archives unless you deliberately want an archive mode.
+
+For `;codexload`, read `codex-runs/LAST-CODEX-RUN.md` first, then follow the referenced project `LAST-HANDOVER.md`. Do not load every recent file by default. Recent handovers are a recovery tool, not the primary context source.
+
+Do not store secrets, raw logs, private evidence, legal or medical material, client data, tokens, passwords, API keys, or private keys in recent handovers.
+
 ## End-To-End Flow
 
 After a meaningful Codex task, Codex records:
@@ -54,4 +76,3 @@ The custom instruction tells ChatGPT to read `codex-runs/LAST-CODEX-RUN.md`, fol
 This workflow does not sync full chat history, hidden model state, local filesystem access, terminal scrollback, or private Codex internals.
 
 It creates a small, explicit, human-readable checkpoint.
-
