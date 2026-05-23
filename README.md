@@ -126,6 +126,16 @@ Do not put secrets, API keys, tokens, private keys, passwords, raw client data, 
 
 The bridge works because Codex writes Markdown and GitHub stores it. ChatGPT Web UI reads it through your connected GitHub repo when asked.
 
+## Promoting Improvements From A Private Handover Repo
+
+Think of the private handover repo as the working lab and this public repo as the cleaned template.
+
+Improvements discovered while using a private repo such as `~/repos/codex-sync` may be ported here only when they are generic, safe, reusable, and not private. Good candidates include script bug fixes, template improvements, clearer loader prompts, safer example wording, and troubleshooting lessons.
+
+Do not copy private handovers, real local paths, names, emails, client details, secrets, raw Codex logs, or project-specific `AGENTS.md` files into this public repo.
+
+Before publishing, run a sanitisation review and prefer reimplementing the idea cleanly instead of copying private files verbatim. See [docs/private-to-public-promotion.md](docs/private-to-public-promotion.md) and [scripts/promote-public-candidate.sh](scripts/promote-public-candidate.sh).
+
 ## Not Official Tooling
 
 This project is not official OpenAI tooling. It is a practical workflow pattern using local files, Git, GitHub, and the ChatGPT GitHub connector.
