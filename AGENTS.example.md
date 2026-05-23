@@ -12,13 +12,17 @@ Copy the parts you want into your local `~/.codex/AGENTS.md`. Keep real private 
 
 ## Launch Mode For Trusted Repos
 
-- For trusted personal repos you control, you may choose a low-friction Codex launch mode.
-- Start Codex from the normal shell with:
+- For your own trusted personal or admin repos, you may choose to use Codex in low-friction YOLO/bypass mode by default.
+- This is only appropriate when you knowingly accept the risk because the work is Git-backed, recoverable, and repeatedly validated.
+- Preferred launch command from the normal shell:
   - `codex --dangerously-bypass-approvals-and-sandbox`
-- Do not start a nested interactive Codex session from inside an already-running Codex session.
-- If a session was started without the intended bypass mode and prompts become excessive, stop cleanly, return to the normal shell prompt, and restart Codex with the intended command.
-- For untrusted, downloaded, client, or unfamiliar repos, do not assume bypass mode is appropriate.
-- Even in bypass mode, keep edits scoped, avoid `git add -A` unless explicitly requested, and do not force-push.
+- Do not launch a nested interactive Codex session from inside an already-running Codex session.
+- If a session was started without the intended bypass mode and prompts become noisy, stop cleanly, return to the normal shell prompt, and restart with the intended command.
+- For your trusted repos, avoid asking for routine file edits, git add, git commit, git push, validation commands, or handover updates if your local rules already permit them.
+- Still keep changes scoped to the requested repo/files.
+- Still avoid `git add -A` unless explicitly requested.
+- Still do not force-push unless explicitly requested.
+- For downloaded, unfamiliar, third-party, client, or risky repos, do not assume YOLO/bypass mode is appropriate.
 
 ## Handover Rule
 
