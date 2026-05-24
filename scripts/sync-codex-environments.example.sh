@@ -12,6 +12,7 @@ targets=(
 
 remote_script=$(cat <<'REMOTE'
 set -euo pipefail
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 dotfiles_path="$1"
 handover_path="$2"
 codex_home_path="$3"
