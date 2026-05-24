@@ -38,6 +38,7 @@ When I type `;codexload my-project`, read:
 
 <owner>/<private-handover-repo>
 project-handovers/my-project/LAST-HANDOVER.md
+codex-runs/by-project/my-project/LAST.md
 
 Summarise the last task, files changed, validation result, risks, and the next safest action.
 ```
@@ -61,4 +62,3 @@ After loading, respond with:
 - risks
 - next safest action
 ```
-

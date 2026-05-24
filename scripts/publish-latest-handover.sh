@@ -25,6 +25,7 @@ Options:
 
 This script stages only:
   codex-runs/LAST-CODEX-RUN.md
+  codex-runs/by-project/<project-name>/LAST.md
   project-handovers/<project-name>/LAST-HANDOVER.md
   project-handovers/<project-name>/recent/*.md additions/deletions
 
@@ -114,8 +115,9 @@ if [[ ! -d "$source_project_path" ]]; then
 fi
 
 project_dir="$handover_repo/project-handovers/$project_name"
+by_project_dir="$handover_repo/codex-runs/by-project/$project_name"
 recent_dir="$project_dir/recent"
-mkdir -p "$handover_repo/codex-runs" "$project_dir" "$recent_dir"
+mkdir -p "$handover_repo/codex-runs" "$by_project_dir" "$project_dir" "$recent_dir"
 
 now="$(date '+%Y-%m-%d %H:%M:%S %Z')"
 stamp="$(date '+%Y.%m.%d-%H%M%S')"
@@ -124,6 +126,7 @@ branch="$(git -C "$source_project_path" branch --show-current 2>/dev/null || pri
 commit="$(git -C "$source_project_path" rev-parse HEAD 2>/dev/null || print "unknown")"
 
 latest_path="$handover_repo/codex-runs/LAST-CODEX-RUN.md"
+by_project_path="$by_project_dir/LAST.md"
 project_path="$project_dir/LAST-HANDOVER.md"
 recent_path="$recent_dir/$stamp.md"
 
@@ -173,6 +176,7 @@ EOF
 }
 
 write_handover "$latest_path" "Latest Codex Run"
+write_handover "$by_project_path" "Project Latest Codex Run"
 write_handover "$project_path" "Project Handover"
 write_handover "$recent_path" "Recent Project Handover"
 
@@ -185,7 +189,7 @@ if (( ${#old_recent_files[@]} > 0 )); then
 fi
 
 git -C "$handover_repo" status --short
-git -C "$handover_repo" add codex-runs/LAST-CODEX-RUN.md "project-handovers/$project_name/LAST-HANDOVER.md" "project-handovers/$project_name/recent"
+git -C "$handover_repo" add codex-runs/LAST-CODEX-RUN.md "codex-runs/by-project/$project_name/LAST.md" "project-handovers/$project_name/LAST-HANDOVER.md" "project-handovers/$project_name/recent"
 
 if git -C "$handover_repo" diff --cached --quiet; then
   print "No handover changes to commit."

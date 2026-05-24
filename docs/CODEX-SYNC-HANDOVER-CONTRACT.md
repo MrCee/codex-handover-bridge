@@ -10,11 +10,12 @@ Every meaningful Codex run should update these files in the private handover rep
 
 ```text
 codex-runs/LAST-CODEX-RUN.md
+codex-runs/by-project/<source-project>/LAST.md
 project-handovers/<source-project>/LAST-HANDOVER.md
 project-handovers/<source-project>/recent/<timestamp>.md
 ```
 
-Keep only a small rolling buffer in each project `recent/` directory, such as the newest 10 Markdown files. `LAST-CODEX-RUN.md` remains the fast loader file for ChatGPT Web UI.
+Keep only a small rolling buffer in each project `recent/` directory, such as the newest 10 Markdown files. `LAST-CODEX-RUN.md` remains the fast default loader file for ChatGPT Web UI; the by-project latest file preserves the current handover for each project.
 
 ## Required Handover Fields
 

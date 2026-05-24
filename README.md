@@ -29,6 +29,7 @@ With this workflow, Codex updates stable files such as:
 
 ```text
 codex-runs/LAST-CODEX-RUN.md
+codex-runs/by-project/<project-name>/LAST.md
 project-handovers/<project-name>/LAST-HANDOVER.md
 ```
 
@@ -38,7 +39,7 @@ Optionally, a private handover repo can also keep a small rolling recovery buffe
 project-handovers/<project-name>/recent/YYYY.MM.DD-HHMMSS.md
 ```
 
-Keep this buffer small, such as the newest 10 handovers per project. `LAST-CODEX-RUN.md` remains the fast loader for `;codexload`; the recent folder is only for recovery if several Codex runs happen before you return to ChatGPT Web UI.
+Keep this buffer small, such as the newest 10 handovers per project. `LAST-CODEX-RUN.md` remains the fast default loader for `;codexload`; `codex-runs/by-project/<project-name>/LAST.md` keeps each project's latest run addressable when another repo runs later. The recent folder is only for recovery if several Codex runs happen before you return to ChatGPT Web UI.
 
 Then ChatGPT Web UI can load those files on demand with a short convention such as:
 
@@ -106,6 +107,7 @@ More loader variants are in [docs/chatgpt-web-ui-loader.md](docs/chatgpt-web-ui-
 At the end of meaningful tasks, update my private handover repo:
 
 - codex-runs/LAST-CODEX-RUN.md
+- codex-runs/by-project/<project-name>/LAST.md
 - project-handovers/<project-name>/LAST-HANDOVER.md
 
 Stage only those expected files, commit them, and push the handover repo.

@@ -22,6 +22,7 @@ Use stable latest files:
 
 ```text
 codex-runs/LAST-CODEX-RUN.md
+codex-runs/by-project/<project-name>/LAST.md
 project-handovers/<project-name>/LAST-HANDOVER.md
 ```
 
@@ -45,7 +46,7 @@ project-handovers/<project-name>/recent/
 
 Delete older recent handovers automatically. Do not create global timestamped archives unless you deliberately want an archive mode.
 
-For `;codexload`, read `codex-runs/LAST-CODEX-RUN.md` first, then follow the referenced project `LAST-HANDOVER.md`. Do not load every recent file by default. Recent handovers are a recovery tool, not the primary context source.
+For default `;codexload`, read `codex-runs/LAST-CODEX-RUN.md` first, then follow the referenced project `LAST-HANDOVER.md`. For project-specific loading, read `codex-runs/by-project/<project-name>/LAST.md`. Do not load every recent file by default. Recent handovers are a recovery tool, not the primary context source.
 
 Do not store secrets, raw logs, private evidence, legal or medical material, client data, tokens, passwords, API keys, or private keys in recent handovers.
 

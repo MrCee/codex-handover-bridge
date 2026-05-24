@@ -39,7 +39,16 @@ if [[ -n "$project_name" ]]; then
   fi
 
   project_path="project-handovers/$project_name/LAST-HANDOVER.md"
+  by_project_path="codex-runs/by-project/$project_name/LAST.md"
   recent_dir="project-handovers/$project_name/recent"
+
+  print
+  print "Project latest Codex run: $by_project_path"
+  if [[ -f "$by_project_path" ]]; then
+    cat "$by_project_path"
+  else
+    print "$by_project_path not found."
+  fi
 
   print
   print "Project handover: $project_path"

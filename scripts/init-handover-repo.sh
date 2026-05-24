@@ -8,6 +8,7 @@ Usage:
 
 Creates a local private handover repo structure:
   codex-runs/LAST-CODEX-RUN.md
+  codex-runs/by-project/.gitkeep
   project-handovers/.gitkeep
   templates/.gitkeep
   .gitignore
@@ -39,7 +40,7 @@ while (( $# > 0 )); do
   shift
 done
 
-mkdir -p "$handover_repo/codex-runs" "$handover_repo/project-handovers" "$handover_repo/templates"
+mkdir -p "$handover_repo/codex-runs/by-project" "$handover_repo/project-handovers" "$handover_repo/templates"
 
 if [[ ! -f "$handover_repo/codex-runs/LAST-CODEX-RUN.md" ]]; then
   cat > "$handover_repo/codex-runs/LAST-CODEX-RUN.md" <<'EOF'
@@ -83,6 +84,7 @@ if [[ ! -f "$handover_repo/codex-runs/LAST-CODEX-RUN.md" ]]; then
 EOF
 fi
 
+touch "$handover_repo/codex-runs/by-project/.gitkeep"
 touch "$handover_repo/project-handovers/.gitkeep"
 touch "$handover_repo/templates/.gitkeep"
 
@@ -113,8 +115,7 @@ Created handover repo structure at:
 Next steps:
   cd "$handover_repo"
   git init
-  git add .gitignore codex-runs/LAST-CODEX-RUN.md project-handovers/.gitkeep templates/.gitkeep
+  git add .gitignore codex-runs/LAST-CODEX-RUN.md codex-runs/by-project/.gitkeep project-handovers/.gitkeep templates/.gitkeep
   git commit -m "chore(init): create handover repo"
   gh repo create <owner>/<private-handover-repo> --private --source . --remote origin --push
 EOF
-
