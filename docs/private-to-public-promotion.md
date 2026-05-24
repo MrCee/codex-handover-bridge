@@ -8,6 +8,8 @@ This project separates the live operational handover repo from the public reusab
 
 Not every private change should be published.
 
+The private handover repo is the working lab. The public repo is the cleaned reusable template. Public promotion is optional and only for improvements that remain useful after all private facts are removed.
+
 ## Personal Automation Versus Template Guidance
 
 Some users may choose to make the promotion check a personal rule in their private Codex instructions. For example, they might require Codex to check every private handover-repo change and decide whether a sanitized public equivalent belongs in a public template repo.
@@ -24,14 +26,23 @@ If it is generic and safe, suggest or apply a sanitized equivalent change to `~/
 
 Never copy private handover content, personal paths, names, emails, secrets, client information, legal or medical material, or project-specific logs into the public repo.
 
+Significant private workflow improvements should trigger a sanitised public review. This review should decide whether the idea belongs in public documentation, templates, example agent rules, loader instructions, helper scripts with placeholders, or troubleshooting notes.
+
+Never copy private handovers directly into the public repo. Recreate the idea with generic examples.
+
 ## Good Public Candidates
 
 Public-facing candidates include:
 
+- reusable handover contract wording
+- AGENTS rule templates
 - script bug fixes
 - template improvements
 - README or documentation improvements
 - safer `AGENTS.example.md` wording
+- generic loader instructions
+- sanitisation checklists
+- helper scripts with placeholders
 - troubleshooting lessons
 - generic config examples
 - generic loader prompt improvements
@@ -42,11 +53,16 @@ Public-facing candidates include:
 Never publish:
 
 - private handovers
+- raw Codex logs
 - real local project paths
+- machine-specific paths
+- network storage paths
 - names, emails, or client details
 - secrets, tokens, or API keys
+- private key material
 - legal, medical, or client evidence
 - raw Codex logs from private work
+- private project implementation details
 - project-specific `AGENTS.md` files
 
 ## Sanitisation Review

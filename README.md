@@ -156,6 +156,12 @@ Before publishing, run a sanitisation review and prefer reimplementing the idea 
 
 Some people may turn this into a personal Codex rule for their private workflow, but it is optional. This template documents the pattern; it does not require every user to maintain a public upstream repo.
 
+Significant private workflow improvements should trigger a sanitized public review. Public promotion is optional and only for safe, generic improvements such as reusable handover wording, AGENTS rule examples, loader instructions, sanitisation checklists, placeholder helper scripts, and troubleshooting notes without private facts.
+
+Never copy private handovers directly into this public repo. Recreate the useful idea with generic project names, placeholder paths, and example-only data.
+
+For a reusable contract template, see [docs/CODEX-SYNC-HANDOVER-CONTRACT.md](docs/CODEX-SYNC-HANDOVER-CONTRACT.md) and [templates/CODEX-HANDOVER-TEMPLATE.md](templates/CODEX-HANDOVER-TEMPLATE.md).
+
 ## Not Official Tooling
 
 This project is not official OpenAI tooling. It is a practical workflow pattern using local files, Git, GitHub, and the ChatGPT GitHub connector.

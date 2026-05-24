@@ -62,6 +62,37 @@ Use summaries and filenames instead of sensitive raw material.
 
 Do not publish private handovers to public template repos.
 
+## Optional Private-To-Public Promotion Review
+
+Treat your private handover repo as the working lab and any public template repo as the cleaned reusable version.
+
+When a private handover-repo update contains a significant reusable improvement, assess whether a sanitized public version belongs in your public template repo.
+
+Good public candidates include:
+
+- reusable handover contract wording
+- AGENTS rule templates
+- safer README wording
+- generic loader instructions
+- sanitisation checklists
+- helper scripts with placeholders
+- troubleshooting notes without private facts
+
+Do not promote:
+
+- private handover files
+- raw Codex logs
+- machine-specific paths
+- network storage paths
+- client names
+- emails/domains
+- secrets/tokens/passwords
+- private key material
+- medical/legal/client details
+- private project implementation details
+
+If promoting, recreate the idea generically. Never copy private handovers directly into public files.
+
 ## Git Rules For The Private Handover Repo
 
 - Always run `git status --short` before staging.
