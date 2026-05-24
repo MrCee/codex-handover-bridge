@@ -69,3 +69,19 @@ Do not promote:
 - private project implementation details
 
 Never copy private handovers directly into the public repo. Recreate the useful idea with placeholder project names, placeholder paths, and example-only data.
+
+## Multi-Machine Sync
+
+If you run Codex on multiple trusted machines, keep the private handover repo and global Codex rules synchronized from a single source of truth.
+
+Use an allowlisted, pull-only workflow:
+
+1. Commit and push the source repo first.
+2. Run a sync script against explicit local or SSH targets.
+3. On each target, run `git pull --ff-only`.
+4. Verify the global `AGENTS.md` contract is present.
+5. Stop on dirty working trees, missing repos, divergent history, or SSH failures.
+
+Never copy Codex auth files, sessions, logs, shell snapshots, `.env` files, keys, tokens, or private runtime state between machines.
+
+See [../scripts/sync-codex-environments.example.sh](../scripts/sync-codex-environments.example.sh) for a generic example.
