@@ -4,11 +4,21 @@ set -euo pipefail
 # Generic example only. Copy into your private handover repo before use.
 # Keep real hostnames, usernames, private paths, and SSH ports out of public repos.
 
-targets=(
-  "current-machine|current-hostname|current-machine-ssh-alias|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
-  "second-machine|second-hostname|second-machine-ssh-alias|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
-  "nas-or-server|server-hostname|server-ssh-alias:2222|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
-)
+script_dir="${0:A:h}"
+repo_root="$(git -C "$script_dir" rev-parse --show-toplevel 2>/dev/null || true)"
+
+if [[ -z "$repo_root" ]]; then
+  echo "error: run this script from inside your private handover repo." >&2
+  exit 1
+fi
+
+fleet_map="${CODEX_ENV_SYNC_CONFIG:-$repo_root/config/codex-environments}"
+
+if [[ ! -f "$fleet_map" ]]; then
+  echo "error: missing fleet map: $fleet_map" >&2
+  echo "create it from config/codex-environments.example." >&2
+  exit 2
+fi
 
 remote_script=$(cat <<'REMOTE'
 set -euo pipefail
@@ -44,7 +54,14 @@ REMOTE
 current_hostname="$(hostname -s 2>/dev/null || hostname)"
 matches=0
 
-for row in "${targets[@]}"; do
+rows=()
+while IFS= read -r row; do
+  [[ -z "${row//[[:space:]]/}" ]] && continue
+  [[ "$row" == \#* ]] && continue
+  rows+=("$row")
+done < "$fleet_map"
+
+for row in "${rows[@]}"; do
   IFS='|' read -r name target_hostname ssh_target dotfiles_path handover_path codex_home_path <<< "$row"
   [[ "$target_hostname" == "$current_hostname" ]] && (( matches += 1 ))
 done
@@ -54,7 +71,7 @@ if (( matches != 1 )); then
   exit 2
 fi
 
-for row in "${targets[@]}"; do
+for row in "${rows[@]}"; do
   IFS='|' read -r name target_hostname ssh_target dotfiles_path handover_path codex_home_path <<< "$row"
   mode="$ssh_target"
   [[ "$target_hostname" == "$current_hostname" ]] && mode="local"

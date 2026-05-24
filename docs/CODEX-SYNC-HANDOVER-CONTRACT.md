@@ -85,3 +85,11 @@ Use an allowlisted, pull-only workflow:
 Never copy Codex auth files, sessions, logs, shell snapshots, `.env` files, keys, tokens, or private runtime state between machines.
 
 See [../scripts/sync-codex-environments.example.sh](../scripts/sync-codex-environments.example.sh) for a generic example.
+
+The companion fleet map uses this format:
+
+```text
+name|hostname|ssh_target|dotfiles_path|handover_repo_path|codex_home_path
+```
+
+The current machine is selected by comparing `hostname -s` with the `hostname` field. The matching row runs locally; all other rows are reached over SSH. Keep real machine names and paths in your private repo only.

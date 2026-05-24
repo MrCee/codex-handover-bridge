@@ -1,0 +1,15 @@
+# Hostname-selected fleet map for private Codex environment sync.
+#
+# Copy this idea into your private handover repo. Do not put real private
+# hostnames, usernames, internal domains, ports, or local paths in a public repo.
+#
+# Format:
+# name|hostname|ssh_target|dotfiles_path|handover_repo_path|codex_home_path
+#
+# The sync script compares `hostname -s` with the second field. The matching row
+# runs locally; all other rows are reached over SSH. This avoids sync loops while
+# allowing any configured machine to initiate the same pull-only sync.
+
+current-machine|current-hostname|current-machine-ssh-alias|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home
+second-machine|second-hostname|second-machine-ssh-alias|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home
+nas-or-server|server-hostname|server-ssh-alias:2222|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home
