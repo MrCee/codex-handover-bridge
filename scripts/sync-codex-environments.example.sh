@@ -21,10 +21,10 @@ sync_repo() {
   local repo_label="$2"
 
   cd "$repo_path"
-  status="$(git status --short)"
-  if [[ -n "$status" ]]; then
+  repo_status="$(git status --short)"
+  if [[ -n "$repo_status" ]]; then
     echo "error: $repo_label has uncommitted changes at $repo_path" >&2
-    echo "$status" >&2
+    echo "$repo_status" >&2
     exit 11
   fi
 
