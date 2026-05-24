@@ -15,7 +15,12 @@ When I type `;codexload`, read `codex-runs/LAST-CODEX-RUN.md` from my connected 
 ```text
 When I type `;codexload`, treat it as a command to continue from my latest Codex handover.
 
-Read this connected GitHub file first:
+If a project is named or inferable from the current repo, read its project-specific latest file first:
+
+<owner>/<private-handover-repo>
+codex-runs/by-project/<project-name>/LAST.md
+
+Otherwise read the global fallback:
 
 <owner>/<private-handover-repo>
 codex-runs/LAST-CODEX-RUN.md

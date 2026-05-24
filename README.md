@@ -41,6 +41,16 @@ project-handovers/<project-name>/recent/YYYY.MM.DD-HHMMSS.md
 
 Keep this buffer small, such as the newest 10 handovers per project. `LAST-CODEX-RUN.md` remains the fast default loader for `;codexload`; `codex-runs/by-project/<project-name>/LAST.md` keeps each project's latest run addressable when another repo runs later. The recent folder is only for recovery if several Codex runs happen before you return to ChatGPT Web UI.
 
+## Loader Selection
+
+ChatGPT Web UI should resolve `;codexload` in this order:
+
+1. If the user names a project, load `codex-runs/by-project/<project-name>/LAST.md`.
+2. If the current repository path or project name is known, load the matching `codex-runs/by-project/<project-name>/LAST.md`.
+3. Only when no project is named or inferable, load `codex-runs/LAST-CODEX-RUN.md` as the global latest fallback.
+
+For status checks, use `scripts/codex-sync-status.sh <project-name>` and keep the `Global latest`, `Requested project latest`, and `Requested project handover mirror` sections separate.
+
 Then ChatGPT Web UI can load those files on demand with a short convention such as:
 
 ```text

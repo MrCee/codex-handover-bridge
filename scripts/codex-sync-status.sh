@@ -25,7 +25,7 @@ print "Latest commit:"
 git log -1 --oneline 2>/dev/null || print "No commits yet."
 
 print
-print "Last Codex run:"
+print "Global latest Codex run: codex-runs/LAST-CODEX-RUN.md"
 if [[ -f codex-runs/LAST-CODEX-RUN.md ]]; then
   cat codex-runs/LAST-CODEX-RUN.md
 else
@@ -43,7 +43,7 @@ if [[ -n "$project_name" ]]; then
   recent_dir="project-handovers/$project_name/recent"
 
   print
-  print "Project latest Codex run: $by_project_path"
+  print "Requested project latest Codex run: $by_project_path"
   if [[ -f "$by_project_path" ]]; then
     cat "$by_project_path"
   else
@@ -51,7 +51,7 @@ if [[ -n "$project_name" ]]; then
   fi
 
   print
-  print "Project handover: $project_path"
+  print "Requested project handover mirror: $project_path"
   if [[ -f "$project_path" ]]; then
     cat "$project_path"
   else

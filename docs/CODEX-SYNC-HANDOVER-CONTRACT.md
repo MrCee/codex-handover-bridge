@@ -17,6 +17,16 @@ project-handovers/<source-project>/recent/<timestamp>.md
 
 Keep only a small rolling buffer in each project `recent/` directory, such as the newest 10 Markdown files. `LAST-CODEX-RUN.md` remains the fast default loader file for ChatGPT Web UI; the by-project latest file preserves the current handover for each project.
 
+## Loader Resolution
+
+ChatGPT Web UI and helper commands should prefer the most specific handover:
+
+1. named project: `codex-runs/by-project/<source-project>/LAST.md`
+2. inferred current repo/project: matching `codex-runs/by-project/<source-project>/LAST.md`
+3. no project context: `codex-runs/LAST-CODEX-RUN.md`
+
+Status output should label global latest, requested project latest, and project handover mirror separately.
+
 ## Required Handover Fields
 
 Each handover should record:
@@ -29,6 +39,8 @@ Each handover should record:
 6. next safest action
 
 Include branch, commit, and validation details where useful. Use summaries instead of raw sensitive material.
+
+Each latest handover should include local path, GitHub repo, current branch, current commit, and host.
 
 ## Commit And Push
 

@@ -46,7 +46,7 @@ project-handovers/<project-name>/recent/
 
 Delete older recent handovers automatically. Do not create global timestamped archives unless you deliberately want an archive mode.
 
-For default `;codexload`, read `codex-runs/LAST-CODEX-RUN.md` first, then follow the referenced project `LAST-HANDOVER.md`. For project-specific loading, read `codex-runs/by-project/<project-name>/LAST.md`. Do not load every recent file by default. Recent handovers are a recovery tool, not the primary context source.
+For project-specific loading, read `codex-runs/by-project/<project-name>/LAST.md`. If the current repository path or project name is known, use that matching by-project latest file. For default `;codexload` with no project context, read `codex-runs/LAST-CODEX-RUN.md` as the global latest fallback, then follow the referenced project `LAST-HANDOVER.md` if needed. Do not load every recent file by default. Recent handovers are a recovery tool, not the primary context source.
 
 Do not store secrets, raw logs, private evidence, legal or medical material, client data, tokens, passwords, API keys, or private keys in recent handovers.
 

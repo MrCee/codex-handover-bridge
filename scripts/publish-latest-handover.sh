@@ -121,6 +121,7 @@ mkdir -p "$handover_repo/codex-runs" "$by_project_dir" "$project_dir" "$recent_d
 
 now="$(date '+%Y-%m-%d %H:%M:%S %Z')"
 stamp="$(date '+%Y.%m.%d-%H%M%S')"
+host="$(hostname 2>/dev/null || print "unknown")"
 source_repo="$(git -C "$source_project_path" remote get-url origin 2>/dev/null || print "unknown")"
 branch="$(git -C "$source_project_path" branch --show-current 2>/dev/null || print "unknown")"
 commit="$(git -C "$source_project_path" rev-parse HEAD 2>/dev/null || print "unknown")"
@@ -143,6 +144,7 @@ write_handover() {
 - GitHub repo: $source_repo
 - current branch: $branch
 - current commit: $commit
+- host: $host
 - task requested: $task
 
 ## Files Inspected
