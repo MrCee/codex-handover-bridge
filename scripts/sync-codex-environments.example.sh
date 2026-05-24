@@ -5,9 +5,9 @@ set -euo pipefail
 # Keep real hostnames, usernames, private paths, and SSH ports out of public repos.
 
 targets=(
-  "current-machine|local|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
-  "second-machine|ssh-alias|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
-  "nas-or-server|ssh-alias:2222|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
+  "current-machine|current-hostname|current-machine-ssh-alias|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
+  "second-machine|second-hostname|second-machine-ssh-alias|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
+  "nas-or-server|server-hostname|server-ssh-alias:2222|/path/to/dotfiles|/path/to/private-handover-repo|/path/to/codex-home"
 )
 
 remote_script=$(cat <<'REMOTE'
@@ -41,11 +41,26 @@ grep -n "Codex Sync + Public Promotion Contract" "$codex_home_path/AGENTS.md"
 REMOTE
 )
 
-for row in "${targets[@]}"; do
-  IFS='|' read -r name ssh_target dotfiles_path handover_path codex_home_path <<< "$row"
-  echo "==> $name"
+current_hostname="$(hostname -s 2>/dev/null || hostname)"
+matches=0
 
-  if [[ "$ssh_target" == "local" ]]; then
+for row in "${targets[@]}"; do
+  IFS='|' read -r name target_hostname ssh_target dotfiles_path handover_path codex_home_path <<< "$row"
+  [[ "$target_hostname" == "$current_hostname" ]] && (( matches += 1 ))
+done
+
+if (( matches != 1 )); then
+  echo "error: current hostname '$current_hostname' must match exactly one target." >&2
+  exit 2
+fi
+
+for row in "${targets[@]}"; do
+  IFS='|' read -r name target_hostname ssh_target dotfiles_path handover_path codex_home_path <<< "$row"
+  mode="$ssh_target"
+  [[ "$target_hostname" == "$current_hostname" ]] && mode="local"
+  echo "==> $name ($target_hostname via $mode)"
+
+  if [[ "$mode" == "local" ]]; then
     zsh -c "$remote_script" -- "$dotfiles_path" "$handover_path" "$codex_home_path"
   else
     ssh_host="$ssh_target"

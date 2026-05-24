@@ -134,7 +134,7 @@ Config and shell safety references:
 - [config/codex-config-workspace-write.example.toml](config/codex-config-workspace-write.example.toml)
 - [config/codex-config-frictionless-danger.example.toml](config/codex-config-frictionless-danger.example.toml)
 
-For multi-machine setups, see [scripts/sync-codex-environments.example.sh](scripts/sync-codex-environments.example.sh). It demonstrates an allowlisted, pull-only SSH sync pattern for keeping private handover repos and Codex rules current across trusted machines without copying runtime secrets.
+For multi-machine setups, see [scripts/sync-codex-environments.example.sh](scripts/sync-codex-environments.example.sh). It demonstrates a hostname-selected, allowlisted, pull-only SSH sync pattern for keeping private handover repos and Codex rules current across trusted machines without copying runtime secrets.
 
 ## Safety Notes
 

@@ -77,7 +77,7 @@ If you run Codex on multiple trusted machines, keep the private handover repo an
 Use an allowlisted, pull-only workflow:
 
 1. Commit and push the source repo first.
-2. Run a sync script against explicit local or SSH targets.
+2. Run a sync script against explicit hostname-selected SSH targets.
 3. On each target, run `git pull --ff-only`.
 4. Verify the global `AGENTS.md` contract is present.
 5. Stop on dirty working trees, missing repos, divergent history, or SSH failures.
