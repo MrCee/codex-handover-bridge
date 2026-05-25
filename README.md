@@ -146,7 +146,7 @@ Config and shell safety references:
 - [config/codex-config-workspace-write.example.toml](config/codex-config-workspace-write.example.toml)
 - [config/codex-config-frictionless-danger.example.toml](config/codex-config-frictionless-danger.example.toml)
 
-For multi-machine setups, see [config/codex-environments.example](config/codex-environments.example) and [scripts/sync-codex-environments.example.sh](scripts/sync-codex-environments.example.sh). Together they demonstrate a hostname-selected, allowlisted, pull-only SSH sync pattern for keeping private handover repos and Codex rules current across trusted machines without copying runtime secrets.
+For multi-machine setups, see [config/codex-environments.example](config/codex-environments.example), [scripts/sync-codex-environments.example.sh](scripts/sync-codex-environments.example.sh), and [docs/fleet-sync-publish-wrapper.md](docs/fleet-sync-publish-wrapper.md). Together they demonstrate a hostname-selected, allowlisted, pull-only SSH sync pattern and a generated-file publish wrapper for keeping private handover repos and Codex rules current across trusted machines without copying runtime secrets.
 
 The fleet map format is:
 
