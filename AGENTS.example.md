@@ -48,11 +48,21 @@ Every handover should include:
 - task requested
 - files inspected
 - files changed
-- commands run
+- commands / validation summary
 - validation performed
 - validation result
 - risks / unknowns
 - next safest action for ChatGPT Web UI
+
+## Handover Command Logging Safety
+
+Handovers are not terminal transcripts. Prefer short, sanitised command summaries that preserve reproducible context without copying sensitive terminal content.
+
+- Full commands should only be listed when they are safe, generic, and useful to rerun.
+- Never include secrets, tokens, API keys, passwords, private keys, cookies, auth headers, signed URLs, `.env` contents, raw private data, raw logs, or full heredocs.
+- Use placeholders such as `<redacted>` when a value is important to understand but unsafe to store.
+- If a command is sensitive, summarise it instead, for example: `Ran a redacted authenticated API request`.
+- Add a `Redactions / Omissions` section to handovers when useful, especially if validation or recovery context depends on omitted sensitive details.
 
 ## Sensitive Data
 

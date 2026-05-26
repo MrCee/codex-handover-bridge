@@ -16,7 +16,9 @@
 
 -
 
-## Commands Run
+## Commands / Validation Summary
+
+List full commands only when they are safe, generic, and useful to rerun. Summarise sensitive commands instead, and omit raw logs, heredocs, auth headers, signed URLs, `.env` contents, private evidence, client material, and secrets.
 
 -
 
@@ -31,6 +33,10 @@
 ## Risks / Unknowns
 
 -
+
+## Redactions / Omissions
+
+- Optional. Note any sensitive command details, raw logs, credentials, private data, or evidence intentionally omitted from this handover.
 
 ## Public Template Promotion
 

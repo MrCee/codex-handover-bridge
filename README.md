@@ -195,6 +195,10 @@ This public repository should not be your live handover repo. Treat it as a temp
 
 Do not put secrets, API keys, tokens, private keys, passwords, raw client data, legal records, medical records, or private chat logs into handovers.
 
+Handovers are not terminal transcripts. Record useful reproducible context, validation results, and risks, but keep command lists short, safe, and sanitised. Full commands should only be listed when they are harmless and useful to rerun. Sensitive commands should be summarised instead, for example `Ran a redacted authenticated API request`.
+
+Omit raw logs, heredocs, auth headers, signed URLs, `.env` contents, private evidence, legal or medical material, client material, secrets, and any other raw private data. Use placeholders such as `<redacted>` where a detail matters but the value must not be stored.
+
 The bridge works because Codex writes Markdown and GitHub stores it. ChatGPT Web UI reads it through your connected GitHub repo when asked.
 
 ## Promoting Improvements From A Private Handover Repo
