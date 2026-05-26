@@ -71,7 +71,13 @@ scripts/init-handover-repo.sh ~/repos/codex-sync
 
 3. Add a ChatGPT Web UI custom instruction using [custom-instructions.example.md](custom-instructions.example.md).
 
-4. Publish a latest handover after meaningful Codex work:
+4. Run Codex normally in a repo that has the handover rules installed.
+
+Once the `AGENTS.md` rules are installed and working, the normal workflow is automatic on the Codex side. Codex loads local `AGENTS.md` rules when it runs in a repo/session, completes the requested local work, then follows the standing handover rule at the end of each meaningful task.
+
+You should not need to paste a handover prompt after every Codex task. Manual prompts and helper scripts are mainly for setup, testing, recovery, or repos that do not yet have the rules installed.
+
+For a one-off test, you can publish a latest handover manually:
 
 ```sh
 scripts/publish-latest-handover.sh ~/repos/codex-sync my-project ~/repos/my-project \
@@ -85,6 +91,29 @@ scripts/publish-latest-handover.sh ~/repos/codex-sync my-project ~/repos/my-proj
 ```text
 ;codexload
 ```
+
+## How The Automation Flows
+
+1. Codex CLI reads the local `AGENTS.md` rules for the current repo/session.
+2. Codex completes the requested local work.
+3. Codex writes or updates Markdown handover files in the private handover repo.
+4. Codex commits and pushes only the expected handover files, if configured and permitted.
+5. ChatGPT Web UI reads the latest handover through the GitHub connector when you type `;codexload`.
+
+## What Is Automatic / What Is Not
+
+Automatic after setup:
+
+- Codex-side handover writing, if the `AGENTS.md` rules are installed.
+- Git-backed handover file updates, if the private handover repo is configured and Codex is permitted to commit and push them.
+
+Not automatic:
+
+- ChatGPT secretly knowing terminal state.
+- Full chat history sync.
+- Hidden model memory sync.
+- Unsafe pushing of source repos.
+- Public promotion of private handovers.
 
 ## The Loader Instruction
 
@@ -109,9 +138,11 @@ When I type `;codexload`, read `codex-runs/LAST-CODEX-RUN.md` from my connected 
 
 The command is just a convention you define for yourself. It is not an official ChatGPT command.
 
-More loader variants are in [docs/chatgpt-web-ui-loader.md](docs/chatgpt-web-ui-loader.md).
+More loader variants are in [docs/chatgpt-web-ui-loader.md](docs/chatgpt-web-ui-loader.md). The loader is the ChatGPT Web UI side of the workflow; it does not replace the Codex-side `AGENTS.md` rule that writes the handover.
 
-## Example Codex Prompt
+## Manual Fallback Prompt
+
+This is not the normal daily workflow once `AGENTS.md` is configured. Use it for setup checks, one-off testing, recovery, or a repo/session where the standing handover rules are not installed.
 
 ```text
 At the end of meaningful tasks, update my private handover repo:

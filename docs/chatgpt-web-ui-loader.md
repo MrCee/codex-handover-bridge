@@ -4,6 +4,8 @@
 
 You define it in Custom Instructions so ChatGPT Web UI knows what to read from your connected GitHub handover repo.
 
+The loader only reads the latest handover. The Codex-side writing is handled separately by local `AGENTS.md` rules, as described in the README Quick Start.
+
 ## Short Loader
 
 ```text
