@@ -56,17 +56,36 @@ If commit or push fails, leave exact recovery commands and the current `git stat
 
 ## Efficient Handover Batching
 
-Do not update, commit, and push a private handover repo after every tiny action. Routine handover pushes should happen at meaningful completed tasks or checkpoints, such as the end of a task group or roughly every 30 minutes of meaningful work.
+Keep an in-session concise running summary during routine work so state can be turned into a handover without reading large logs or transcripts.
 
-Push immediately when a run changes authentication, security, deployment, runtime behavior, or review targets; when quota, time, or context is running low; when the working state would be difficult to recover; or when the user explicitly asks for ChatGPT Web UI reload state.
+Do not update, commit, and push a private handover repo after every tiny action. Routine handover pushes should happen at meaningful completed tasks or checkpoints, such as the end of a task group or roughly every 30 minutes of meaningful work, whichever comes first.
+
+Push immediately when a run changes authentication, security, deployment, runtime behavior, or review targets; when source project files changed and work is stopping; when quota, time, or context is running low; when the working state would be difficult to recover; or when the user explicitly asks for ChatGPT Web UI reload state or a handover.
 
 Skip pushes for read-only inspection, planning, diagnostics, diff previews, and intermediate edits that will continue in the same session.
 
+If changes are being batched and not pushed yet, the final response should include a compact local checkpoint summary with changed files, validation already run, risks, and the next safest action.
+
 During time-limited sessions, keep handovers concise. Avoid reading large session logs, raw transcripts, or other bulky runtime records unless needed for recovery.
+
+## ChatGPT Web UI Checkpoint Publishing
+
+ChatGPT Web UI may publish checkpoint handovers directly to a private handover repo when the user pastes a Codex summary or asks for a Web UI checkpoint. Codex should not spend local usage pushing the handover repo when ChatGPT Web UI can safely publish the checkpoint from a pasted summary.
+
+Suggested private files for Web UI checkpoints:
+
+```text
+webui-checkpoints/LATEST.md
+webui-checkpoints/recent/YYYY.MM.DD-HHMMSS.md
+```
+
+Keep only the newest 10 Markdown files in `webui-checkpoints/recent/`.
+
+Web UI checkpoint files must be private, concise, and sanitized. ChatGPT Web UI must not invent local command output, validation results, branch state, commit IDs, or terminal output it has not been given. It must not publish secrets, passwords, tokens, private keys, raw logs, credentials, or other sensitive material.
 
 ## Public Promotion Review
 
-When a private handover-repo update contains a significant reusable improvement, assess whether a sanitized public version belongs in a public template repo.
+Always assess whether a private workflow improvement has a public-safe reusable equivalent. When a private handover-repo update contains a significant reusable improvement, assess whether a sanitized public version belongs in a public template repo.
 
 Public-safe candidates include:
 
@@ -75,6 +94,10 @@ Public-safe candidates include:
 - safer README wording
 - generic loader instructions
 - sanitisation checklists
+- efficient handover batching wording
+- generic checkpoint cadence rules
+- public-safe Web UI publishing patterns
+- generic AGENTS examples
 - helper scripts with placeholders
 - troubleshooting notes without private facts
 
@@ -82,13 +105,18 @@ Do not promote:
 
 - private handover files
 - raw Codex logs
+- private project paths
 - machine-specific paths
+- machine names
+- hostnames
 - network storage paths
 - client names
 - emails/domains
+- credentials
 - secrets/tokens/passwords
 - private key material
 - medical/legal/client details
+- project-specific AGENTS.md content
 - private project implementation details
 
 Never copy private handovers directly into the public repo. Recreate the useful idea with placeholder project names, placeholder paths, and example-only data.
