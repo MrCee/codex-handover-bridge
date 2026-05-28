@@ -25,7 +25,7 @@ The workflow is deliberately small, explicit, readable, and recoverable.
 
 Without a handover, you often have to paste summaries manually between Codex CLI and ChatGPT Web UI. That is easy to forget and easy to get wrong.
 
-With this workflow, Codex updates stable files such as:
+With this workflow, Codex updates stable files at meaningful checkpoints, such as:
 
 ```text
 codex-runs/LAST-CODEX-RUN.md
@@ -73,13 +73,13 @@ scripts/init-handover-repo.sh ~/repos/codex-sync
 
 4. Run Codex normally in a repo that has the handover rules installed.
 
-Once the `AGENTS.md` rules are installed and working, the normal workflow is automatic on the Codex side. Codex loads local `AGENTS.md` rules when it runs in a repo/session, completes the requested local work, then follows the standing handover rule at the end of each meaningful task.
+Once the `AGENTS.md` rules are installed and working, the normal workflow is automatic on the Codex side. Codex loads local `AGENTS.md` rules when it runs in a repo/session, completes the requested local work, then follows the standing handover rule at meaningful checkpoints.
 
 You should not need to paste a handover prompt after every Codex task. Manual prompts and helper scripts are mainly for setup, testing, recovery, or repos that do not yet have the rules installed.
 
-Routine handover pushes should be batched at meaningful completed tasks or checkpoints, such as the end of a task group or roughly every 30 minutes of meaningful work, not after every tiny action. Push immediately for recovery-sensitive changes such as authentication, security, deployment, runtime, review-target, low-context, difficult recovery state, or explicit Web UI reload needs.
+Routine handover pushes should be batched at meaningful completed tasks or checkpoints, such as the end of a task group or roughly every 30 minutes of meaningful work, not after every tiny action. Routine work should avoid broad audits and large session-log reads unless they are needed for recovery. Push immediately for recovery-sensitive changes such as authentication, security, deployment, runtime, review-target, low-context, difficult recovery state, or explicit Web UI reload needs.
 
-If the user chooses, ChatGPT Web UI can also publish a concise private checkpoint from a pasted Codex summary. Web UI checkpoints must not invent local validation, command output, branch state, commit IDs, or terminal output that was not provided.
+If the user chooses, ChatGPT Web UI can also publish a concise private checkpoint from a pasted Codex summary when that saves local Codex usage. Web UI checkpoints must not invent local validation, command output, branch state, commit IDs, or terminal output that was not provided.
 
 For a one-off test, you can publish a latest handover manually:
 
@@ -100,8 +100,8 @@ scripts/publish-latest-handover.sh ~/repos/codex-sync my-project ~/repos/my-proj
 
 1. Codex CLI reads the local `AGENTS.md` rules for the current repo/session.
 2. Codex completes the requested local work.
-3. Codex writes or updates Markdown handover files in the private handover repo.
-4. Codex commits and pushes only the expected handover files, if configured and permitted.
+3. Codex writes or updates Markdown handover files in the private handover repo at a meaningful checkpoint.
+4. Codex commits and pushes only the expected handover files at the configured checkpoint cadence, if configured and permitted.
 5. ChatGPT Web UI reads the latest handover through the GitHub connector when you type `;codexload`.
 
 ## What Is Automatic / What Is Not
@@ -149,7 +149,7 @@ More loader variants are in [docs/chatgpt-web-ui-loader.md](docs/chatgpt-web-ui-
 This is not the normal daily workflow once `AGENTS.md` is configured. Use it for setup checks, one-off testing, recovery, or a repo/session where the standing handover rules are not installed.
 
 ```text
-At the end of meaningful tasks, update my private handover repo:
+At meaningful checkpoints, update my private handover repo:
 
 - codex-runs/LAST-CODEX-RUN.md
 - codex-runs/by-project/<project-name>/LAST.md
@@ -159,6 +159,8 @@ Stage only those expected files, commit them, and push the handover repo.
 Do not stage unrelated project files or use `git add -A` unless explicitly requested.
 Do not store secrets, tokens, private evidence, or raw logs.
 Do not push the source project unless I explicitly ask.
+Batch routine handover pushes at the end of a task group or roughly every 30 minutes. Push immediately for explicit Web UI reload state, handover requests, auth/security changes, runtime/deploy/review target changes, quota/time/context stops, or difficult recovery state.
+ChatGPT Web UI may publish a private checkpoint from a pasted Codex summary, but it must not invent local validation, command output, branch state, commit IDs, or terminal output.
 ```
 
 ## Repository Layout
