@@ -2,6 +2,8 @@
 
 Copy the parts you want into your local `~/.codex/AGENTS.md`. Keep real private paths in your local file, not in public template repos.
 
+For the canonical public-safe agent workflow, see `docs/AGENT-WORKFLOW-SPEC.md`. That spec is designed to stay identical between a private operational handover repo and this public template repo; put private local details only in private docs.
+
 ## Shell Safety
 
 - Use subshells for pasteable multi-command blocks:

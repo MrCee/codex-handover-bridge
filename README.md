@@ -9,6 +9,8 @@ A small, Git-backed workflow for carrying local Codex CLI context back into Chat
 
 `codex-handover-bridge` is the public template and documentation project. Your real operational handover repository is usually a separate private repo, often named something like `codex-sync`.
 
+The canonical public-safe agent workflow spec is [docs/AGENT-WORKFLOW-SPEC.md](docs/AGENT-WORKFLOW-SPEC.md). It is designed to stay byte-identical with the matching copy in a private operational handover repo, while private README files and private rules can carry local operational details.
+
 ## Why This Exists
 
 Codex CLI works locally. ChatGPT Web UI does not automatically know what Codex just did in your terminal, what files changed, what validation ran, or what risks remain.
