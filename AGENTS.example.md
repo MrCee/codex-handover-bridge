@@ -54,6 +54,16 @@ Every handover should include:
 - risks / unknowns
 - next safest action for ChatGPT Web UI
 
+## Handover Batching
+
+Do not update, commit, and push the private handover repo after every tiny action. Batch routine handover updates at meaningful completed tasks or checkpoints, such as the end of a task group or roughly every 30 minutes of meaningful work.
+
+Push a handover immediately when the run changes authentication, security, deployment, runtime behavior, or review targets; when quota, time, or context is running low; when the working state would be difficult to recover; or when the user explicitly asks for ChatGPT Web UI reload state.
+
+Skip handover pushes for read-only inspection, planning, diagnostics, diff previews, and intermediate edits that will continue in the same session.
+
+During time-limited sessions, keep handovers concise. Avoid reading large session logs, raw transcripts, or other bulky runtime records unless they are needed for recovery.
+
 ## Handover Command Logging Safety
 
 Handovers are not terminal transcripts. Prefer short, sanitised command summaries that preserve reproducible context without copying sensitive terminal content.

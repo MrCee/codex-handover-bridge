@@ -77,6 +77,8 @@ Once the `AGENTS.md` rules are installed and working, the normal workflow is aut
 
 You should not need to paste a handover prompt after every Codex task. Manual prompts and helper scripts are mainly for setup, testing, recovery, or repos that do not yet have the rules installed.
 
+Routine handover pushes should be batched at meaningful completed tasks or checkpoints, not after every tiny action. Push immediately for recovery-sensitive changes such as authentication, security, deployment, runtime, review-target, low-context, or explicit Web UI reload needs.
+
 For a one-off test, you can publish a latest handover manually:
 
 ```sh

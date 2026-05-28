@@ -54,6 +54,16 @@ After successful handover updates:
 
 If commit or push fails, leave exact recovery commands and the current `git status --short` output in the handover and final response.
 
+## Efficient Handover Batching
+
+Do not update, commit, and push a private handover repo after every tiny action. Routine handover pushes should happen at meaningful completed tasks or checkpoints, such as the end of a task group or roughly every 30 minutes of meaningful work.
+
+Push immediately when a run changes authentication, security, deployment, runtime behavior, or review targets; when quota, time, or context is running low; when the working state would be difficult to recover; or when the user explicitly asks for ChatGPT Web UI reload state.
+
+Skip pushes for read-only inspection, planning, diagnostics, diff previews, and intermediate edits that will continue in the same session.
+
+During time-limited sessions, keep handovers concise. Avoid reading large session logs, raw transcripts, or other bulky runtime records unless needed for recovery.
+
 ## Public Promotion Review
 
 When a private handover-repo update contains a significant reusable improvement, assess whether a sanitized public version belongs in a public template repo.
